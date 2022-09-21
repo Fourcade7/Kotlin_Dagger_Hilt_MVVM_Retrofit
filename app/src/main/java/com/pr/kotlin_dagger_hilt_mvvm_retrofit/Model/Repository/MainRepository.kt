@@ -1,5 +1,6 @@
 package com.pr.kotlin_dagger_hilt_mvvm_retrofit.Model.Repository
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.pr.kotlin_dagger_hilt_mvvm_retrofit.Model.Model_Response.Post
 import com.pr.kotlin_dagger_hilt_mvvm_retrofit.Model.Network.Api
@@ -19,6 +20,9 @@ class MainRepository @Inject constructor(
 
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
                 liveData.postValue(response.body())
+                if (response.isSuccessful){
+                    Log.d("PR7", "onResponse: ${response.code()}")
+                }
             }
 
             override fun onFailure(call: Call<List<Post>>, t: Throwable) {
